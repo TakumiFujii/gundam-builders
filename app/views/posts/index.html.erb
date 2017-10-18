@@ -1,0 +1,15 @@
+<div class ="text-center">
+  <div class ="form-inline navbar-form"> <!-- navbar-form使うと位置がいい感じに調整される! -->
+    <%= form_tag posts_path, :method => 'get' do %> <%#　projects_pathはモデル名で読みかえること %>
+      <%= text_field_tag :search, params[:search], :size => 50, :placeholder => "タイトルで検索", class: "form-control"%>
+      <%= submit_tag "検索", :name => nil, class: "btn btn-primary btn-sm" %>
+    <% end %>
+  </div>
+  
+  <% if @posts%>
+    <div class= "text-center">
+      <h3>検索結果</h3>
+      <%= render "posts/posts", posts: @posts%>
+    </div>
+  <% end %>
+</div>

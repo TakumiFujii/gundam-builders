@@ -1,0 +1,8 @@
+<div class ="text_center">
+  <h1>記事一覧</h1>
+    <% @articles.each do |article| %>
+      <div>
+       <%= link_to article.title, article_path(article) %>
+      </div>
+    <% end %>
+</div>

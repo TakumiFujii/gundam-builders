@@ -1,0 +1,31 @@
+<div class ="text-center">
+  <h1>ランキング</h1>
+  <div class = "ranking_names">
+    <%= link_to "今日ランキング", dayly_ranking_path%>
+    <%= link_to "今月ランキング", monthly_ranking_path%>
+    <%= link_to "全期間ランキング", whole_ranking_path%>
+  <div>
+</div>
+
+<h2>今月</h2><br>
+<% if @posts.present? %>
+  <div class="row">
+    <% @posts.each_with_index do |post, index| %>
+      <div class="item">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+              <%= link_to image_tag(post.main_image_url(:thumb), {:alt => '投稿写真'}), post_path(post)%>
+            </div>
+            <div class="panel-footer">
+              <p class="text-center">
+                <%= index+1 %>位: <%= post.title %><br>
+                お気に入り数：<%= @ranking_counts[post.id] %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

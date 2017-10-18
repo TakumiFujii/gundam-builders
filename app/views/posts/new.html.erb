@@ -1,0 +1,101 @@
+<div  style ="background-color:white; padding:10px;">
+  <div class ="text-center">
+    <h1>投稿画面(test)</h1>
+  </div>
+  
+  <div class = "row">
+    <div class = "col-md-6 col-md-offset-3">
+      <%= form_for(@post) do |f|%>
+      <%= render 'layouts/error_messages', model: f.object %>
+        <div class = "form-group">
+          <%= f.label :title, "タイトル"%>
+          <%= f.text_field :title, class: "form-control"%>
+        </div>
+        
+        <div class = "form-group">
+          <%= f.label :main_dscr, "作品紹介"%>
+          <%= f.text_area :main_dscr, class: "form-control", rows: 10%>
+        </div>
+        
+        <div class = "form-group">
+          <%= f.label :main_image, "メイン写真"%><br>
+          　トップに表示されますので、一番お気に入りの写真をお選びください！
+          <%= f.file_field :main_image, class: "form-control"%>
+        </div>
+        
+        
+        <div class = "form-group">
+          <%= f.label :appeal_1, "サブ写真(9枚まで)"%><br>
+          　コメントを書くと画像の下に表示されます＾＾
+          <%= f.file_field :appeal_1, class: "form-control"%>
+          <%= f.text_area :dscr_1, class: "form-control", rows: 2, :placeholder => "コメント"%>
+        </div>
+        
+        <div class = "form-group">
+          <%= f.file_field :appeal_2, class: "form-control"%>
+          <%= f.text_area :dscr_2, class: "form-control", rows: 2, :placeholder => "コメント"%>
+        </div>
+        
+        <div class = "form-group">
+          <%= f.file_field :appeal_3, class: "form-control"%>
+          <%= f.text_area :dscr_3, class: "form-control", rows: 2, :placeholder => "コメント"%>
+        </div>
+        
+        <div class = "form-group">
+          <%= f.file_field :appeal_4, class: "form-control"%>
+          <%= f.text_area :dscr_4, class: "form-control", rows: 2, :placeholder => "コメント"%>
+        </div>
+        
+        <div class = "form-group">
+          <%= f.file_field :process_a, class: "form-control"%>
+          <%= f.text_area :dscr_a, class: "form-control", rows: 2, :placeholder => "コメント"%>
+        </div>
+        
+        <div class = "form-group">
+          <%= f.file_field :process_b, class: "form-control"%>
+          <%= f.text_area :dscr_b, class: "form-control", rows: 2, :placeholder => "コメント"%>
+        </div>
+        
+        <div class = "form-group">
+          <%= f.file_field :process_c, class: "form-control"%>
+          <%= f.text_area :dscr_c, class: "form-control", rows: 2, :placeholder => "コメント"%>
+        </div>
+        
+        <div class = "form-group">
+          <%= f.file_field :process_d, class: "form-control"%>
+          <%= f.text_area :dscr_d, class: "form-control", rows: 2, :placeholder => "コメント"%>
+        </div>
+        
+        
+        <div class ="field">
+            <div style ="font-weight:700;">タグ</div>
+             タグを付けると同じタグをつけたガンプラーと繋がることができます！
+          <ul id ="post-tags">
+            <li></li>
+          </ul>
+        </div>
+        
+        <div class = "form-group">
+          <%= f.label :category_id, "グレード"%>
+          <%= f.collection_select :category_id, Category.all, :id, :name, class: "form-control"%>
+        </div>
+        
+        <div class = "form-group">
+          <%= f.label :short_message, "一言コメント"%><br>
+          ホーム画面で画像と一緒に表示されます＾＾
+          <%= f.text_area :short_message, class: "form-control", rows: 2%>
+        </div>
+        
+        <%= f.submit "投稿", class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#post-tags").tagit();
+    });
+    
+    
+</script>

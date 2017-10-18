@@ -1,0 +1,102 @@
+<div class ="text-center">
+  <h1>記事投稿(管理人用)</h1>
+</div>
+
+<div class = "row">
+  <div class = "col-md-6 col-md-offset-3">
+    <%= form_for(@article) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      
+      <div class = "field">
+        <%= f.text_field :title, class: "form-control", :placeholder => "タイトル"%>
+      </div><br>
+      
+      <div class ="field">
+        <%= f.text_area :content, class: "form-control", :placeholder => "内容", rows: 10 %>
+      </div><br>
+      
+      <div class ="field">
+        <%= f.collection_select :post_1, Post.all, :id, :title, class: "form-control" %>
+      </div><br>
+      
+      <div class ="field">
+       <%= f.text_area :comment_1, class: "form-control", :placeholder => "コメント１"%>
+      </div><br>
+      
+      <div class ="field">
+        <%= f.collection_select :post_2, Post.all, :id, :title, class: "form-control" %>
+      </div><br>
+      
+      <div class ="field">
+       <%= f.text_area :comment_2, class: "form-control", :placeholder => "コメント2"%>
+      </div><br>
+      
+      <div class ="field">
+        <%= f.collection_select :post_3, Post.all, :id, :title, class: "form-control" %>
+      </div><br>
+      
+      <div class ="field">
+       <%= f.text_area :comment_3, class: "form-control", :placeholder => "コメント3"%>
+      </div><br>
+      
+      <div class ="field">
+        <%= f.collection_select :post_4, Post.all, :id, :title, class: "form-control" %>
+      </div><br>
+      
+      <div class ="field">
+       <%= f.text_area :comment_4, class: "form-control", :placeholder => "コメント4"%>
+      </div><br>
+      
+      <div class ="field">
+        <%= f.collection_select :post_5, Post.all, :id, :title, class: "form-control" %>
+      </div><br>
+      
+      <div class ="field">
+       <%= f.text_area :comment_5, class: "form-control", :placeholder => "コメント5"%>
+      </div><br>
+      
+      <div class ="field">
+        <%= f.collection_select :post_6, Post.all, :id, :title, class: "form-control" %>
+      </div><br>
+      
+      <div class ="field">
+       <%= f.text_area :comment_6, class: "form-control", :placeholder => "コメント6"%>
+      </div><br>
+      
+      <div class ="field">
+        <%= f.collection_select :post_7, Post.all, :id, :title, class: "form-control" %>
+      </div><br>
+      
+      <div class ="field">
+       <%= f.text_area :comment_7, class: "form-control", :placeholder => "コメント7"%>
+      </div><br>
+      
+      <div class ="field">
+        <%= f.collection_select :post_8, Post.all, :id, :title, class: "form-control" %>
+      </div><br>
+      
+      <div class ="field">
+       <%= f.text_area :comment_8, class: "form-control", :placeholder => "コメント8"%>
+      </div><br>
+      
+      <div class ="field">
+        <%= f.collection_select :post_9, Post.all, :id, :title, class: "form-control" %>
+      </div><br>
+      
+      <div class ="field">
+       <%= f.text_area :comment_9, class: "form-control", :placeholder => "コメント9"%>
+      </div><br>
+      
+      <div class ="field">
+        <%= f.collection_select :post_10, Post.all, :id, :title, class: "form-control" %>
+      </div><br>
+      
+      <div class ="field">
+       <%= f.text_area :comment_10, class: "form-control", :placeholder => "コメント10"%>
+      </div><br>
+      
+      <%= f.submit "投稿", class: "btn btn_success"%>
+    <% end %>
+  </div>
+</div>
+

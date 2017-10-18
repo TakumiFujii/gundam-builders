@@ -1,0 +1,24 @@
+<% if users.any? %>
+  <ul class="media-list" style ="background-color:white;padding:15px;">
+    <% users.each do |user| %>
+      <li class="media" style = "border:1px solod:#dbebf8;">
+        <div class="media-left list">
+          <% unless @user.profile_image? %>
+            <%= image_tag("default_picture.jpg", :alt => "アイコン")%>
+          <% else %>
+            <%= image_tag @user.profile_image_url(:thumb)%>
+          <% end %>
+        </div>
+        <div class="media-body">
+          <h2>
+            <%= link_to user.name, user_path(user) %>
+          </h2>
+          <div>
+            
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <%= paginate users %>
+<% end %>

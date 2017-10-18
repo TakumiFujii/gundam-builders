@@ -1,0 +1,29 @@
+<div style = "background-color:white; padding:15px;">
+  <div class ="row">
+    <% posts.each do |post| %>
+      <% user = post.user %>
+      <div class ="col-md-3 col-sm-4 col-xs-12">
+        <div class="content">
+          <%= link_to image_tag(post.main_image_url(:thumb)), post_path(post), class: "inner"%>
+          <div class="caption text-center" style="display: none;">
+            <%= link_to post_path(post), class: "link" do%>
+              <%= post.title %><br>
+              <%= post.short_message%>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <%= paginate posts %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function () {
+    $('.content').hover(function () {
+      $('.caption', this).fadeIn("slow");
+    }, function () {
+      $('.caption', this).fadeOut("slow");
+    });
+  });
+</script>

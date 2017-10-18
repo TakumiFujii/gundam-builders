@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <div class = "text-center">
+      <h3>人気のタグ</h3>
+      <div style ="background-color:white;padding:10px;">
+        <% @categories.each do |category|%>
+          <% @cat_posts = category.posts.count%>
+          <%= link_to grades_category_path(category), class:"tags" do %>
+            <%= category.name%>(<%= @cat_posts %>)
+          <% end %>
+        <% end %>
+        
+        <% @tags.each do |tag| %>
+          <% @tag_posts = Post.tagged_with(tag).count%>
+          <%= link_to tags_posts_path(name: tag.name), class: "tags" do%>
+            <%= tag %>(<%= @tag_posts %>)
+          <% end %>
+        <% end %>
+        
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,146 @@
+<div class = "row" style = "background-color:white; padding:10px;">
+  <div class ="col-md-4">
+    <div class="thumbnails">
+      <div class="row">
+        <div class ="col-md-6">
+          <%= image_tag @post.main_image_url(:main_pic), class:"alt_text" %>
+          <% if @post.appeal_1?%>
+            <%= image_tag @post.appeal_1_url(:main_pic), :alt => @post.dscr_1, class:"alt_text"%>
+          <% end %>
+          <% if @post.appeal_2?%>
+            <%= image_tag @post.appeal_2_url(:main_pic), :alt => @post.dscr_2, class:"alt_text" %>
+          <% end %>
+          <% if @post.appeal_3?%>
+            <%= image_tag @post.appeal_3_url(:main_pic), :alt => @post.dscr_3, class:"alt_text" %>
+          <% end %>
+        </div>
+        <div class ="col-md-6">
+          <% if @post.appeal_4?%>
+            <%= image_tag @post.appeal_4_url(:main_pic), :alt => @post.dscr_4, class:"alt_text" %>
+          <% end %>
+          <% if @post.process_a?%>
+              <%= image_tag @post.process_a_url(:main_pic), :alt => @post.dscr_a, class:"alt_text" %>
+            <% end %>
+          <% if @post.process_b?%>
+              <%= image_tag @post.process_b_url(:main_pic), :alt => @post.dscr_b, class:"alt_text" %>
+          <% end %>
+          <% if @post.process_c?%>
+              <%= image_tag @post.process_c_url(:main_pic), :alt => @post.dscr_c, class:"alt_text" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class = "col-md-8">
+    <div class ="text-center">
+      <div class="mainImage">
+        <%= image_tag @post.main_image_url%>
+        <p class="show_caption"></p>
+      </div>
+    </div>
+  </div>
+</div><br>
+
+<div class ="row">
+  <div class ="col-md-8">
+    
+    <h3>
+      <%= @post.title%>
+      <% if @post.user_id == current_user.id %>
+        <%= link_to "編集する", edit_post_path(@post), class: "btn btn-success btn-xs" %>
+        <%= link_to "削除する", @post, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+      <% end %>
+    </h3><Hr>
+    <%= @post.main_dscr %><br><br>
+    
+    <% @tags.each do |tag| %>
+      <% @tag_posts = Post.tagged_with(tag).count%>
+      <%= link_to tags_posts_path(name: tag), class: "tags" do%>
+        <%= tag %>(<%= @tag_posts%>)
+      <% end %>
+    <% end %>
+    
+    <br><br>
+    <div class ="panel panel-default">
+      <div class="panel-heading">
+        コメント
+      </div>
+      <div class ="panel-body">
+        <%= form_for(@comment) do |f| %>
+          <%= f.hidden_field :post_id, :value => @post.id %>
+          <div class = "field">
+            <%= f.text_area :content, class: "form-control", rows: 3 %>
+          </div>
+          <%= f.submit "投稿", class: "btn btn-default" %>
+        <% end %><Hr>
+        
+        <% if @comments.any?%>
+          <ul class ="media-list">
+            <% @comments.each do |comment|%>
+              <% @user = comment.user%>
+              <li class ="media">
+                <div class="media-left">
+                  <% unless @post.user.profile_image? %>
+                    <%= image_tag("default_picture.jpg", :alt => "アイコン")%>
+                  <% else %>
+                    <%= image_tag @post.user.profile_image_url(:icon)%>
+                  <% end %>
+                </div>
+                <div class="media-body">
+                  <%=link_to @user.name, user_path(@user) %>
+                  <% if @user = current_user%>
+                    <%= link_to "編集する", edit_comment_path(comment), class: "btn btn-default btn-xs"%>
+                    <%= link_to "削除する", comment, method: :delete, class: "btn btn-default btn-xs" %>
+                  <% end %>
+                  <br>
+                  <div style="max-width:600px;word-wrap:break-word;">
+                    <%= comment.content %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+    
+    
+   
+    
+   
+    
+  </div>
+  <div class ="col-md-4">
+    <%= render "favorites/favorite_button", post: @post%>
+    <div class ="user_panel">
+      <div class = "row">
+        <div class ="col-md-4">
+          <% unless @post.user.profile_image? %>
+            <%= image_tag("default_picture.jpg", :alt => "アイコン")%>
+          <% else %>
+            <%= image_tag @post.user.profile_image_url(:icon)%>
+          <% end %> 
+        </div>
+        <div class ="col-md-8">
+          <h4 style = "color:gray;"><%= link_to @post.user.name, user_path(@post.user)%></h4><br>
+          <%= render 'relationships/follow_button', user: @post.user %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+$(function () {
+    $('.thumbnails img').hover(function () {
+        var $thisImg = $(this).attr('src');
+        var $thisAlt = $(this).attr('alt');
+        $('.mainImage img').attr({src: $thisImg, alt: $thisAlt});
+        $('.mainImage p').text($thisAlt);
+    });
+});
+
+
+
+</script>
